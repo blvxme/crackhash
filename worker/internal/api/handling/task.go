@@ -21,7 +21,7 @@ func HandleTaskRequest(w http.ResponseWriter, r *http.Request) {
 		}
 	}()
 
-	var taskRequest dto.TaskRequest
+	taskRequest := dto.TaskRequest{}
 	if err := json.NewDecoder(r.Body).Decode(&taskRequest); err != nil {
 		log.Errorf("Failed to decode request body: %v\n", err)
 		http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)

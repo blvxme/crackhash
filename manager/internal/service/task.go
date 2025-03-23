@@ -76,6 +76,10 @@ func sendTaskRequest(taskRequest dto.TaskRequest, workerId int) (err error) {
 	log.Infof("Sending task request to %s\n", addr)
 
 	taskRequestJson, err := json.Marshal(taskRequest)
+	if err != nil {
+		return
+	}
+
 	req, err := http.NewRequest(http.MethodPost, addr, bytes.NewBuffer(taskRequestJson))
 	if err != nil {
 		return

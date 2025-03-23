@@ -21,7 +21,7 @@ func HandleCrackingRequest(w http.ResponseWriter, r *http.Request) {
 		}
 	}()
 
-	var crackingRequest dto.CrackingRequest
+	crackingRequest := dto.CrackingRequest{}
 	if err := json.NewDecoder(r.Body).Decode(&crackingRequest); err != nil {
 		log.Errorf("Failed to decode request body: %v\n", err)
 		http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
@@ -38,7 +38,7 @@ func HandleCrackingRequest(w http.ResponseWriter, r *http.Request) {
 	}
 
 	crackingResponse := dto.CrackingResponse{RequestId: uuid}
-	if err := json.NewEncoder(w).Encode(crackingResponse); err != nil {
+	if err = json.NewEncoder(w).Encode(crackingResponse); err != nil {
 		log.Errorf("Failed to encode response: %v\n", err)
 		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		return

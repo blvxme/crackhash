@@ -31,7 +31,7 @@ func HandleStatusRequest(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 
-	if err := json.NewEncoder(w).Encode(requestStatus); err != nil {
+	if err = json.NewEncoder(w).Encode(requestStatus); err != nil {
 		log.Errorf("Failed to encode response: %v\n", err)
 		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		return
